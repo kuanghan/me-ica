@@ -927,7 +927,7 @@ if __name__=='__main__':
 	parser.add_option('',"--manacc",dest='manacc',help="Comma separated list of manually accepted components",default=None)
 	parser.add_option('',"--strict",dest='strict',action='store_true',help="Ignore low-variance ambiguous components",default=False)
 	#parser.add_option('',"--wav",dest='wav',help="Perform wavelet PCA, default False",default=False)
-	parser.add_option('',"--no_gscontrol",dest='no_gscontrol',action='store_true',help="Control global signal using spatial approach",default=False)
+	parser.add_option('',"--no_gscontrol",dest='no_gscontrol',action='store_true',help="Control global signal using spatial approach; turns off both standard GSR and minimal image regression.",default=False)
 	parser.add_option('',"--kdaw",dest='kdaw',help="Dimensionality augmentation weight (Kappa). Default 10. -1 for low-dimensional ICA",default=10.)
 	parser.add_option('',"--rdaw",dest='rdaw',help="Dimensionality augmentation weight (Rho). Default 1. -1 for low-dimensional ICA",default=1.)
 	parser.add_option('',"--conv",dest='conv',help="Convergence limit. Default 2.5e-5",default='2.5e-5')
@@ -1031,5 +1031,6 @@ if __name__=='__main__':
 		print "\n** WARNING! No BOLD components detected!!! Please check data and results!\n"
     
 	writeresults()
-	gscontrol_mmix()
+	if not options.no_gscontrol:
+		gscontrol_mmix()
 	if options.dne: writeresults_echoes()    
