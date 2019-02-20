@@ -685,6 +685,8 @@ else: tedanapath = 'tedana.py'
 logcomment("Perform TE-dependence analysis (takes a good while)",level=1)
 interactive_flag=''
 if 'IPYTHON' in args: interactive_flag =' -i -- '
+if options.no_gscontrol:
+	options.ted_args += ' --no_gscontrol '
 sl.append("%s%s %s %s -e %s  -d %s --sourceTEs=%s --kdaw=%s --rdaw=1 --initcost=%s --finalcost=%s --conv=2.5e-5 %s %s" % (tedflag,sys.executable,interactive_flag, '/'.join([meicadir,tedanapath]),options.tes,ica_input,options.sourceTEs,options.daw,options.initcost,options.finalcost,strict_setting, options.ted_args))
 if outprefix=='': outprefix=setname
 
